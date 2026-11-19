@@ -7,6 +7,7 @@ import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Select, Field, Modal, EmptyState } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/Toast";
+import { friendlyError } from "@/lib/errors";
 import { getSupabase } from "@/lib/supabase";
 import type { FundTransaction, Profile, TxType } from "@/lib/types";
 import { formatVND, todayISO } from "@/lib/format";
@@ -81,7 +82,7 @@ function FundContent() {
     });
     setSaving(false);
     if (error) {
-      toast("Không thể lưu giao dịch: " + error.message, "error");
+      toast("Không thể lưu giao dịch: " + friendlyError(error), "error");
       return;
     }
     toast("Đã ghi giao dịch!");

@@ -8,6 +8,7 @@ import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Field, Modal, Badge, Avatar } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/Toast";
+import { friendlyError } from "@/lib/errors";
 import { getSupabase } from "@/lib/supabase";
 import { avatarColor, formatVND } from "@/lib/format";
 
@@ -69,7 +70,7 @@ function ProfileContent() {
       position: fPos || null,
     }).eq("id", profile.id);
     setSaving(false);
-    if (error) return toast("Không thể lưu: " + error.message, "error");
+    if (error) return toast("Không thể lưu: " + friendlyError(error), "error");
     toast("Đã cập nhật hồ sơ!");
     setShowEdit(false);
     await refreshProfile();

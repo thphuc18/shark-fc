@@ -7,6 +7,7 @@ import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Select, Field, Modal, EmptyState, Badge } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/Toast";
+import { friendlyError } from "@/lib/errors";
 import { getSupabase } from "@/lib/supabase";
 import type { Debt, Profile } from "@/lib/types";
 import { formatVND } from "@/lib/format";
@@ -78,7 +79,7 @@ function DebtsContent() {
       reason: reason.trim() || null,
     });
     setSaving(false);
-    if (error) return toast("Không thể lưu: " + error.message, "error");
+    if (error) return toast("Không thể lưu: " + friendlyError(error), "error");
     toast("Đã ghi công nợ!");
     setShow(false);
     setAmount("");
@@ -95,7 +96,7 @@ function DebtsContent() {
       .from("debts")
       .update({ status: "paid", paid_at: new Date().toISOString() })
       .eq("id", d.id);
-    if (error) return toast("Không thể cập nhật: " + error.message, "error");
+    if (error) return toast("Không thể cập nhật: " + friendlyError(error), "error");
     toast("Đã thanh toán xong!");
     await load();
   }

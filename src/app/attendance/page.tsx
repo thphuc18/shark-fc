@@ -7,6 +7,7 @@ import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Select, Field, Modal, Badge, EmptyState, Avatar } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/Toast";
+import { friendlyError } from "@/lib/errors";
 import { getSupabase } from "@/lib/supabase";
 import type { Profile, AttendanceSession, AttendanceRecord, MarkStatus, SessionType } from "@/lib/types";
 import { formatDateVN, relativeDayVN, todayISO, avatarColor } from "@/lib/format";
@@ -109,7 +110,7 @@ function AttendanceContent() {
       error = del.error;
     }
     if (error) {
-      toast("Không thể lưu điểm danh: " + error.message, "error");
+      toast("Không thể lưu điểm danh: " + friendlyError(error), "error");
       return;
     }
     await load();
@@ -137,7 +138,7 @@ function AttendanceContent() {
     });
     setCreating(false);
     if (error) {
-      toast("Không thể tạo phiên: " + error.message, "error");
+      toast("Không thể tạo phiên: " + friendlyError(error), "error");
       return;
     }
     toast("Đã tạo phiên mới!");

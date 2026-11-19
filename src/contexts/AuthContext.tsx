@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase";
+import { friendlyError } from "@/lib/errors";
 import type { Profile } from "@/lib/types";
 
 interface SignUpInput {
@@ -107,7 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email,
         password,
       });
-      return error ? mapAuthError(error.message) : null;
+      return error ? friendlyError(error) : null;
     },
     [supabase]
   );
@@ -127,7 +128,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           },
         },
       });
-      return error ? mapAuthError(error.message) : null;
+      return error ? friendlyError(error) : null;
     },
     [supabase]
   );
@@ -155,13 +156,3 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
-function mapAuthError(msg: string): string {
-  if (/invalid login credentials/i.test(msg))
-    return "Tài khoản hoặc mật khẩu không đúng";
-  if (/already registered/i.test(msg))
-    return "Tên tài khoản này đã được đăng ký. Hãy đăng nhập.";
-  if (/at least 6/i.test(msg)) return "Mật khẩu phải có ít nhất 6 ký tự";
-  if (/rate limit/i.test(msg))
-    return "Bạn thử quá nhiều lần. Hãy đợi ít phút rồi thử lại.";
-  return msg;
-}

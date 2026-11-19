@@ -139,7 +139,7 @@ function MembersContent() {
         <Card className="bg-slate-50">
           <p className="text-[11px] text-slate-400 font-semibold leading-relaxed">
             <b className="text-slate-500">Thêm thành viên mới:</b> chia sẻ link đăng ký (nút
-            {"Link đăng ký"} phía trên) — người mới tự tạo tài khoản email + mật khẩu. Chạm vào
+            {"Link đăng ký"} phía trên) — người mới tự tạo tài khoản + mật khẩu. Chạm vào
             thẻ thành viên để sửa thông tin / cấp quyền admin.
           </p>
         </Card>

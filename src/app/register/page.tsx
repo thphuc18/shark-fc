@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/Toast";
 import { Button, Input, Field } from "@/components/ui";
-import { TEAM_NAME } from "@/lib/config";
+import { TEAM_NAME, authEmailFor } from "@/lib/config";
 
 export default function RegisterPage() {
   const { signUp, session } = useAuth();
@@ -18,7 +18,7 @@ export default function RegisterPage() {
   const [nickname, setNickname] = useState("");
   const [jersey, setJersey] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -34,7 +34,7 @@ export default function RegisterPage() {
       nickname,
       jersey: jersey ? Number(jersey) : null,
       phone,
-      email,
+      email: authEmailFor(username),
       password,
     });
     setSubmitting(false);
@@ -47,7 +47,7 @@ export default function RegisterPage() {
       if (session) router.replace("/");
     }, 500);
     setNotice(
-      "Đăng ký thành công! Nếu chưa vào được trang chủ, hãy kiểm tra email xác nhận (nếu admin bật xác nhận email)."
+      "Đăng ký thành công! Hãy quay lại trang Đăng nhập, dùng tên tài khoản vừa tạo để đăng nhập."
     );
     toast("Đăng ký thành công!");
   }
@@ -103,16 +103,19 @@ export default function RegisterPage() {
               onChange={(e) => setPhone(e.target.value)}
             />
           </Field>
-          <Field label="Email *">
+          <Field label="Tên tài khoản *">
             <Input
-              type="email"
               required
-              autoComplete="email"
-              placeholder="bạn@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              pattern="[a-zA-Z0-9._-]{3,20}"
+              title="3-20 ký tự: chữ, số, dấu . _ - (không dấu, không khoảng trắng)"
+              placeholder="ví dụ: phuc"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </Field>
+          <p className="text-[11px] text-slate-400 font-medium -mt-2.5 px-0.5">
+            Dùng để đăng nhập — không dấu, không khoảng trắng.
+          </p>
           <Field label="Mật khẩu *">
             <Input
               type="password"

@@ -6,13 +6,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button, Input, Field } from "@/components/ui";
-import { TEAM_NAME, TAGLINE } from "@/lib/config";
-import { Mail, Lock } from "lucide-react";
+import { TEAM_NAME, TAGLINE, authEmailFor } from "@/lib/config";
+import { User, Lock } from "lucide-react";
 
 export default function LoginPage() {
   const { signIn, session, loading, configured } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -25,7 +25,14 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
-    const err = await signIn(email, password);
+    // Có "@" thì là email, không thì là tên tài khoản
+    const isEmail = login.includes("@");
+    if (!isEmail && !/^[a-zA-Z0-9._-]{3,20}$/.test(login.trim())) {
+      setError("Tên tài khoản: 3-20 ký tự, chỉ dùng chữ/số và các dấu . _ -");
+      setSubmitting(false);
+      return;
+    }
+    const err = await signIn(isEmail ? login.trim() : authEmailFor(login), password);
     setSubmitting(false);
     if (err) setError(err);
     else router.replace("/");
@@ -47,20 +54,23 @@ export default function LoginPage() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="w-full space-y-4">
-          <Field label="Email">
+          <Field label="Tên tài khoản">
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <Input
-                type="email"
+                type="text"
                 required
-                autoComplete="email"
-                placeholder="bạn@email.com"
+                autoComplete="username"
+                placeholder="ví dụ: phuc"
                 className="pl-10"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
               />
             </div>
           </Field>
+          <p className="text-[11px] text-slate-400 font-medium -mt-2.5 px-0.5">
+            Tài khoản cũ dùng email? Nhập email đầy đủ (vd: a@gmail.com)
+          </p>
           <Field label="Mật khẩu">
             <div className="relative">
               <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />

@@ -157,9 +157,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 function mapAuthError(msg: string): string {
   if (/invalid login credentials/i.test(msg))
-    return "Email hoặc mật khẩu không đúng";
+    return "Tài khoản hoặc mật khẩu không đúng";
   if (/already registered/i.test(msg))
-    return "Email này đã được đăng ký. Hãy đăng nhập.";
+    return "Tên tài khoản này đã được đăng ký. Hãy đăng nhập.";
   if (/at least 6/i.test(msg)) return "Mật khẩu phải có ít nhất 6 ký tự";
   if (/rate limit/i.test(msg))
     return "Bạn thử quá nhiều lần. Hãy đợi ít phút rồi thử lại.";

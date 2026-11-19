@@ -15,9 +15,8 @@ import type { Profile } from "@/lib/types";
 
 interface SignUpInput {
   fullName: string;
-  nickname: string;
+  displayName: string;
   jersey: number | null;
-  phone: string;
   email: string;
   password: string;
 }
@@ -122,8 +121,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         options: {
           data: {
             full_name: input.fullName.trim(),
-            nickname: input.nickname.trim() || null,
-            phone: input.phone.trim() || null,
+            username: input.email.trim().split("@")[0],
+            display_name: input.displayName.trim() || null,
             jersey_number: input.jersey,
           },
         },

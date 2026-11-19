@@ -3,21 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/Toast";
 import { Button, Input, Field } from "@/components/ui";
 import { TEAM_NAME, authEmailFor } from "@/lib/config";
 
 export default function RegisterPage() {
-  const { signUp, session } = useAuth();
+  const { signUp } = useAuth();
   const { toast } = useToast();
-  const router = useRouter();
 
   const [fullName, setFullName] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [display, setDisplay] = useState("");
   const [jersey, setJersey] = useState("");
-  const [phone, setPhone] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -31,9 +28,8 @@ export default function RegisterPage() {
     setSubmitting(true);
     const err = await signUp({
       fullName,
-      nickname,
+      displayName: display,
       jersey: jersey ? Number(jersey) : null,
-      phone,
       email: authEmailFor(username),
       password,
     });
@@ -42,12 +38,8 @@ export default function RegisterPage() {
       setError(err);
       return;
     }
-    // Nếu bật xác nhận email ở Supabase, session chưa có ngay
-    setTimeout(() => {
-      if (session) router.replace("/");
-    }, 500);
     setNotice(
-      "Đăng ký thành công! Hãy quay lại trang Đăng nhập, dùng tên tài khoản vừa tạo để đăng nhập."
+      "Đăng ký thành công! Hãy liên hệ Admin phê duyệt. Đăng nhập để xem trạng thái tài khoản của bạn."
     );
     toast("Đăng ký thành công!");
   }
@@ -79,8 +71,8 @@ export default function RegisterPage() {
             <Field label="Biệt danh">
               <Input
                 placeholder="Tên hay gọi"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
+                value={display}
+                onChange={(e) => setDisplay(e.target.value)}
               />
             </Field>
             <Field label="Số áo">
@@ -94,14 +86,6 @@ export default function RegisterPage() {
               />
             </Field>
           </div>
-          <Field label="Số điện thoại">
-            <Input
-              type="tel"
-              placeholder="09xx xxx xxx"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </Field>
           <Field label="Tên tài khoản *">
             <Input
               required

@@ -6,26 +6,34 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import {
   Home,
-  ClipboardCheck,
   Wallet,
-  ReceiptText,
+  Users,
+  CalendarClock,
   User,
+  ShieldCheck,
 } from "lucide-react";
 import { TEAM_NAME } from "@/lib/config";
 import { useAuth } from "@/contexts/AuthContext";
-import { avatarColor, initials } from "@/lib/format";
+import { avatarColor, displayName, initials } from "@/lib/format";
 
 const TABS = [
   { href: "/", label: "Trang chủ", icon: Home },
-  { href: "/attendance", label: "Điểm danh", icon: ClipboardCheck },
-  { href: "/fund", label: "Quỹ", icon: Wallet },
-  { href: "/debts", label: "Công nợ", icon: ReceiptText },
-  { href: "/profile", label: "Tôi", icon: User },
+  { href: "/fund", label: "Quỹ & Nợ", icon: Wallet },
+  { href: "/players", label: "Cầu thủ", icon: Users },
+  { href: "/matches", label: "Trận đấu", icon: CalendarClock },
+  { href: "/profile", label: "Cá nhân", icon: User },
 ];
+
+const ADMIN_TAB = { href: "/admin", label: "Quản trị", icon: ShieldCheck };
 
 export function Frame({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { session, profile } = useAuth();
+
+  const isAdmin = !!profile && profile.role === "admin";
+  const tabs = isAdmin ? [...TABS, ADMIN_TAB] : TABS;
+  // Chỉ hiện menu khi đã đăng nhập VÀ tài khoản được duyệt
+  const showNav = !!session && !!profile && profile.status === "active" && profile.is_active;
 
   return (
     <div className="flex-1 flex flex-col max-w-md mx-auto w-full bg-slate-50 min-h-screen shadow-xl border-x border-slate-200 relative">
@@ -48,9 +56,22 @@ export function Frame({ children }: { children: ReactNode }) {
           {session && profile ? (
             <Link
               href="/profile"
-              className={`w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-extrabold ring-2 ring-white shadow ${avatarColor(profile.nickname || profile.full_name)}`}
+              className="w-9 h-9 shrink-0"
             >
-              {initials(profile.nickname || profile.full_name)}
+              {profile.avatar_url ? (
+                <img
+                  src={profile.avatar_url}
+                  alt={displayName(profile)}
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-white shadow"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div
+                  className={`w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-extrabold ring-2 ring-white shadow ${avatarColor(displayName(profile))}`}
+                >
+                  {initials(displayName(profile))}
+                </div>
+              )}
             </Link>
           ) : (
             <Link
@@ -68,11 +89,15 @@ export function Frame({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      {/* ===== Bottom Nav (chỉ hiện khi đã đăng nhập) ===== */}
-      {session && (
+      {/* ===== Bottom Nav (chỉ hiện khi đã đăng nhập & được duyệt) ===== */}
+      {showNav && (
         <nav className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200">
-          <div className="max-w-md mx-auto grid grid-cols-5">
-            {TABS.map((t) => {
+          <div
+            className={`max-w-md mx-auto grid ${
+              tabs.length === 5 ? "grid-cols-5" : "grid-cols-6"
+            }`}
+          >
+            {tabs.map((t) => {
               const active =
                 t.href === "/"
                   ? pathname === "/"

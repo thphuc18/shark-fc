@@ -37,7 +37,7 @@ export default function LoginPage() {
         {/* Brand */}
         <div className="flex flex-col items-center gap-3">
           <div className="relative w-20 h-20 rounded-3xl bg-white border border-slate-200 shadow-lg overflow-hidden">
-            <Image src="/logo.svg" alt={TEAM_NAME} fill className="object-contain" sizes="80px" />
+            <Image src="/logo.png" alt={TEAM_NAME} fill className="object-contain" sizes="80px" />
           </div>
           <h1 className="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
             {TEAM_NAME}

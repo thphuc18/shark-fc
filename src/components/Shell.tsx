@@ -36,7 +36,7 @@ export function Shell({ children }: { children: ReactNode }) {
           className="flex items-center gap-2 active:scale-95 transition-transform"
         >
           <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-200 shadow-sm flex items-center justify-center bg-white">
-            <Image src="/logo.svg" alt={TEAM_NAME} fill className="object-contain" sizes="32px" />
+            <Image src="/logo.png" alt={TEAM_NAME} fill className="object-contain" sizes="32px" />
           </div>
           <div>
             <h1 className="font-extrabold text-sm tracking-wider bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">

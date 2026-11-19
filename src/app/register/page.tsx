@@ -57,7 +57,7 @@ export default function RegisterPage() {
       <div className="flex-1 flex flex-col justify-center p-6 gap-6">
         <div className="flex items-center gap-3">
           <div className="relative w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow overflow-hidden">
-            <Image src="/logo.svg" alt={TEAM_NAME} fill className="object-contain" sizes="48px" />
+            <Image src="/logo.png" alt={TEAM_NAME} fill className="object-contain" sizes="48px" />
           </div>
           <div>
             <h1 className="text-lg font-extrabold text-slate-800">

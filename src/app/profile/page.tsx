@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LogOut, Pencil, Phone, Shirt, ShieldCheck, Star } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Field, Modal, Badge, Avatar } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -194,9 +193,7 @@ function ProfileContent() {
 export default function ProfilePage() {
   return (
     <RequireAuth>
-      <Shell>
-        <ProfileContent />
-      </Shell>
+      <ProfileContent />
     </RequireAuth>
   );
 }

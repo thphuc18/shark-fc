@@ -23,7 +23,7 @@ const TABS = [
   { href: "/profile", label: "Tôi", icon: User },
 ];
 
-export function Shell({ children }: { children: ReactNode }) {
+export function Frame({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { session, profile } = useAuth();
 
@@ -68,30 +68,32 @@ export function Shell({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      {/* ===== Bottom Nav ===== */}
-      <nav className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200">
-        <div className="max-w-md mx-auto grid grid-cols-5">
-          {TABS.map((t) => {
-            const active =
-              t.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(t.href);
-            const Icon = t.icon;
-            return (
-              <Link
-                key={t.href}
-                href={t.href}
-                className={`flex flex-col items-center gap-1 py-2.5 text-[10px] font-bold transition-colors ${
-                  active ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
-                }`}
-              >
-                <Icon className={`w-5 h-5 ${active ? "fill-blue-600/10" : ""}`} strokeWidth={active ? 2.5 : 2} />
-                {t.label}
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+      {/* ===== Bottom Nav (chỉ hiện khi đã đăng nhập) ===== */}
+      {session && (
+        <nav className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200">
+          <div className="max-w-md mx-auto grid grid-cols-5">
+            {TABS.map((t) => {
+              const active =
+                t.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(t.href);
+              const Icon = t.icon;
+              return (
+                <Link
+                  key={t.href}
+                  href={t.href}
+                  className={`flex flex-col items-center gap-1 py-2.5 text-[10px] font-bold transition-colors ${
+                    active ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <Icon className={`w-5 h-5 ${active ? "fill-blue-600/10" : ""}`} strokeWidth={active ? 2.5 : 2} />
+                  {t.label}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      )}
     </div>
   );
 }

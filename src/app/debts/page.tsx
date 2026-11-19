@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Plus, ReceiptText, ChevronDown, ChevronUp } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Select, Field, Modal, EmptyState, Badge } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -234,9 +233,7 @@ function DebtsContent() {
 export default function DebtsPage() {
   return (
     <RequireAuth>
-      <Shell>
-        <DebtsContent />
-      </Shell>
+      <DebtsContent />
     </RequireAuth>
   );
 }

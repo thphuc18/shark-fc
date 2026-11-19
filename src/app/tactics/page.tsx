@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Save, LayoutTemplate, UserX } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Field, Modal, EmptyState, Avatar, Badge } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -256,9 +255,7 @@ function TacticsContent() {
 export default function TacticsPage() {
   return (
     <RequireAuth>
-      <Shell>
-        <TacticsContent />
-      </Shell>
+      <TacticsContent />
     </RequireAuth>
   );
 }

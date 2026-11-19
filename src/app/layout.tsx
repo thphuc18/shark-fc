@@ -3,6 +3,7 @@ import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ToastProvider } from "@/components/Toast";
+import { Frame } from "@/components/Frame";
 import { TEAM_NAME, TAGLINE } from "@/lib/config";
 
 const beVn = Be_Vietnam_Pro({
@@ -31,7 +32,9 @@ export default function RootLayout({
     <html lang="vi" className="h-full scroll-smooth">
       <body className={`${beVn.variable} font-sans min-h-full antialiased`}>
         <AuthProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <Frame>{children}</Frame>
+          </ToastProvider>
         </AuthProvider>
       </body>
     </html>

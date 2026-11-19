@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Link2 } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Select, Field, Modal, Badge, Avatar } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -207,9 +206,7 @@ function MembersContent() {
 export default function MembersPage() {
   return (
     <RequireAuth>
-      <Shell>
-        <MembersContent />
-      </Shell>
+      <MembersContent />
     </RequireAuth>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, ChevronLeft, ChevronRight, ClipboardCheck, CalendarDays } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card, Button, Input, Select, Field, Modal, Badge, EmptyState, Avatar } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -362,9 +361,7 @@ function SelfStatus({
 export default function AttendancePage() {
   return (
     <RequireAuth>
-      <Shell>
-        <AttendanceContent />
-      </Shell>
+      <AttendanceContent />
     </RequireAuth>
   );
 }

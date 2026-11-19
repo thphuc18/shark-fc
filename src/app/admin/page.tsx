@@ -12,7 +12,6 @@ import {
   UsersRound,
   LayoutTemplate,
 } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card, EmptyState } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -167,9 +166,7 @@ function AdminLink({ href, icon, label, color }: { href: string; icon: React.Rea
 export default function AdminPage() {
   return (
     <RequireAuth>
-      <Shell>
-        <AdminContent />
-      </Shell>
+      <AdminContent />
     </RequireAuth>
   );
 }

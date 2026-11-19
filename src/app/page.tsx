@@ -11,7 +11,6 @@ import {
   LayoutTemplate,
   ReceiptText,
 } from "lucide-react";
-import { Shell } from "@/components/Shell";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Card } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthContext";
@@ -285,9 +284,7 @@ function QuickAction({
 export default function HomePage() {
   return (
     <RequireAuth>
-      <Shell>
-        <HomeContent />
-      </Shell>
+      <HomeContent />
     </RequireAuth>
   );
 }

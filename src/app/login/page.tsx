@@ -39,8 +39,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex-1 flex flex-col max-w-md mx-auto w-full bg-slate-50 min-h-screen shadow-xl border-x border-slate-200">
-      <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
+    <div className="flex-1 flex flex-col items-center justify-center gap-6">
         {/* Brand */}
         <div className="flex flex-col items-center gap-3">
           <div className="relative w-20 h-20 rounded-3xl bg-white border border-slate-200 shadow-lg overflow-hidden">
@@ -109,7 +108,6 @@ export default function LoginPage() {
             Chưa cấu hình Supabase — hãy thêm biến môi trường vào .env.local
           </p>
         )}
-      </div>
     </div>
   );
 }

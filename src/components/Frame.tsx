@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import {
   Home,
   Wallet,
@@ -29,6 +29,15 @@ const ADMIN_TAB = { href: "/admin", label: "Quản trị", icon: ShieldCheck };
 export function Frame({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const { session, profile } = useAuth();
+
+  // Trang tải thành công → xóa cờ "đang tự tải lại" (dành cho error.tsx)
+  useEffect(() => {
+    try {
+      window.sessionStorage.removeItem("__sharkfc_reloading");
+    } catch {
+      // bỏ qua
+    }
+  }, []);
 
   const isAdmin = !!profile && profile.role === "admin";
   const tabs = isAdmin ? [...TABS, ADMIN_TAB] : TABS;

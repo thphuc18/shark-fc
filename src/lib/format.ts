@@ -155,21 +155,18 @@ const AVATAR_COLORS = [
 ];
 
 /** Chữ cái đầu cho avatar */
-export function initials(name: string): string {
-  const parts = name.trim().split(/\s+/).filter(Boolean);
+export function initials(name: string | null | undefined): string {
+  const parts = (name || "").trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return "?";
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return (parts[parts.length - 2][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-export function avatarColor(name: string): string {
+export function avatarColor(name: string | null | undefined): string {
+  const safe = name || "";
   let h = 0;
-  for (let i = 0; i < name.length; i++) h = (h * 31 + charCodeSafe(name, i)) >>> 0;
+  for (let i = 0; i < safe.length; i++) h = (h * 31 + safe.charCodeAt(i)) >>> 0;
   return AVATAR_COLORS[h % AVATAR_COLORS.length];
-}
-
-function charCodeSafe(s: string, i: number): number {
-  return s.charCodeAt(i) || 0;
 }
 
 /** Ảnh đại diện mặc định kiểu nhân vật (đúng như site gốc) */
@@ -186,5 +183,5 @@ export function avatarSrc(p: Pick<Profile, "avatar_url" | "full_name"> & {
 
 /** Tên hiển thị ưu tiên biệt danh */
 export function displayName(p: Pick<Profile, "full_name" | "display_name">): string {
-  return p.display_name || p.full_name;
+  return p.display_name || p.full_name || "Cầu thủ";
 }

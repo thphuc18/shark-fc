@@ -59,9 +59,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
       return;
     }
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session ?? null);
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data }) => {
+        setSession(data.session ?? null);
+      })
+      .catch(() => {
+        // Lỗi mạng khi đọc phiên — giữ session null, để onAuthStateChange xử lý
+      })
+      .finally(() => {
+        // Chỉ kết thúc "đang kiểm tra phiên" SAU khi đã biết có session hay không
+        setLoading(false);
+      });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
       setSession(s);
     });
@@ -72,7 +81,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!supabase || !session) {
       setProfile(null);
-      setLoading(false);
+      // Không setLoading(false) ở đây — để effect getSession() quyết định
+      // (tránh "đá" user đã đăng nhập ra /login khi mạng chậm)
       return;
     }
     setLoading(true);

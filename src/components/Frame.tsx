@@ -32,8 +32,8 @@ export function Frame({ children }: { children: ReactNode }) {
 
   const isAdmin = !!profile && profile.role === "admin";
   const tabs = isAdmin ? [...TABS, ADMIN_TAB] : TABS;
-  // Chỉ hiện menu khi đã đăng nhập VÀ tài khoản được duyệt
-  const showNav = !!session && !!profile && profile.status === "active" && profile.is_active;
+  // Hiện menu khi đã đăng nhập (các trang nội dung vẫn được RequireAuth chặn)
+  const showNav = !!session && !!profile;
 
   return (
     <div className="flex-1 flex flex-col max-w-md mx-auto w-full bg-slate-50 min-h-screen shadow-xl border-x border-slate-200 relative">
@@ -91,7 +91,7 @@ export function Frame({ children }: { children: ReactNode }) {
 
       {/* ===== Bottom Nav (chỉ hiện khi đã đăng nhập & được duyệt) ===== */}
       {showNav && (
-        <nav className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200">
+        <nav className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 pb-[env(safe-area-inset-bottom)]">
           <div
             className={`max-w-md mx-auto grid ${
               tabs.length === 5 ? "grid-cols-5" : "grid-cols-6"

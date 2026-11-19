@@ -37,7 +37,7 @@ function FundContent() {
     if (!sb) return;
     setLoading(true);
     const [t, m] = await Promise.all([
-      sb.from("fund_transactions").select("*, profiles(nickname, full_name, jersey_number)").order("transaction_date", { ascending: false }).order("created_at", { ascending: false }).limit(200),
+      sb.from("fund_transactions").select("*, profiles!fund_transactions_member_id_fkey(nickname, full_name, jersey_number)").order("transaction_date", { ascending: false }).order("created_at", { ascending: false }).limit(200),
       sb.from("profiles").select("*").eq("is_active", true).order("nickname"),
     ]);
     setTxs(t.data ?? []);

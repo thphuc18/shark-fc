@@ -91,7 +91,7 @@ function HomeContent() {
 
       const rec = await sb
         .from("fund_transactions")
-        .select("*, profiles(nickname, full_name, jersey_number)")
+        .select("*, profiles!fund_transactions_member_id_fkey(nickname, full_name, jersey_number)")
         .order("created_at", { ascending: false })
         .limit(3);
       setRecent(rec.data ?? []);

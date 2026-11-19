@@ -152,6 +152,11 @@ begin
      and (select count(*) from public.profiles where role = 'admin' and is_active) <= 1 then
     raise exception 'Không thể tắt quản trị viên cuối cùng';
   end if;
+  -- Không được hạ quyền admin cuối cùng
+  if new.role = 'member' and old.role = 'admin' and new.is_active
+     and (select count(*) from public.profiles where role = 'admin' and is_active) <= 1 then
+    raise exception 'Không thể hạ quyền quản trị viên cuối cùng';
+  end if;
   return new;
 end;
 $$;

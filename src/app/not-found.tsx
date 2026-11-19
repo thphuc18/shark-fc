@@ -12,7 +12,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="mt-2 px-4 py-2 rounded-xl bg-red-600 text-white text-sm font-extrabold"
+          className="mt-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-extrabold"
         >
           Về trang chủ
         </Link>

@@ -86,7 +86,7 @@ function ProfileContent() {
       <Card className="flex flex-col items-center text-center py-6 bg-gradient-to-b from-white to-slate-50">
         <div className="relative">
           {profile.jersey_number != null ? (
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-red-600 to-rose-500 text-white flex items-center justify-center text-3xl font-extrabold shadow-lg shadow-red-600/25">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-3xl font-extrabold shadow-lg shadow-blue-600/25">
               {profile.jersey_number}
             </div>
           ) : (
@@ -173,7 +173,7 @@ function ProfileContent() {
                   type="button"
                   onClick={() => setFPos(fPos === p ? "" : p)}
                   className={`px-3 py-1.5 rounded-lg text-[11px] font-extrabold border-2 transition ${
-                    fPos === p ? "border-red-500 bg-red-50 text-red-600" : "border-slate-200 text-slate-400"
+                    fPos === p ? "border-blue-500 bg-blue-50 text-blue-600" : "border-slate-200 text-slate-400"
                   }`}
                 >
                   {p || "Không chọn"}

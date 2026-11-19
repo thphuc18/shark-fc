@@ -41,7 +41,7 @@ export function Button({
 }) {
   const styles: Record<BtnVariant, string> = {
     primary:
-      "bg-red-600 text-white hover:bg-red-700 shadow-sm shadow-red-600/20",
+      "bg-blue-600 text-white hover:bg-blue-700 shadow-sm shadow-blue-600/20",
     success:
       "bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm shadow-emerald-600/20",
     danger: "bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100",
@@ -69,7 +69,7 @@ export function Input({
   return (
     <input
       {...rest}
-      className={`w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition ${className}`}
+      className={`w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition ${className}`}
     />
   );
 }
@@ -82,7 +82,7 @@ export function Select({
   return (
     <select
       {...rest}
-      className={`w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition ${className}`}
+      className={`w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition ${className}`}
     >
       {children}
     </select>

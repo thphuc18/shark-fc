@@ -39,7 +39,7 @@ export function Shell({ children }: { children: ReactNode }) {
             <Image src="/logo.png" alt={TEAM_NAME} fill className="object-contain" sizes="32px" />
           </div>
           <div>
-            <h1 className="font-extrabold text-sm tracking-wider bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+            <h1 className="font-extrabold text-sm tracking-wider bg-gradient-to-r from-blue-600 via-cyan-500 to-sky-400 bg-clip-text text-transparent">
               {TEAM_NAME}
             </h1>
           </div>
@@ -55,7 +55,7 @@ export function Shell({ children }: { children: ReactNode }) {
           ) : (
             <Link
               href="/login"
-              className="px-3 py-1.5 text-xs font-extrabold rounded-lg bg-red-600 text-white hover:bg-red-700 shadow-sm shadow-red-600/10"
+              className="px-3 py-1.5 text-xs font-extrabold rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-sm shadow-blue-600/10"
             >
               Đăng nhập
             </Link>
@@ -82,10 +82,10 @@ export function Shell({ children }: { children: ReactNode }) {
                 key={t.href}
                 href={t.href}
                 className={`flex flex-col items-center gap-1 py-2.5 text-[10px] font-bold transition-colors ${
-                  active ? "text-red-600" : "text-slate-400 hover:text-slate-600"
+                  active ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
                 }`}
               >
-                <Icon className={`w-5 h-5 ${active ? "fill-red-600/10" : ""}`} strokeWidth={active ? 2.5 : 2} />
+                <Icon className={`w-5 h-5 ${active ? "fill-blue-600/10" : ""}`} strokeWidth={active ? 2.5 : 2} />
                 {t.label}
               </Link>
             );

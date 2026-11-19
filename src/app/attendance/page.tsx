@@ -176,7 +176,7 @@ function AttendanceContent() {
           {list.map(({ p, rec }) => {
             const isMe = p.id === me;
             return (
-              <div key={p.id} className={`flex items-center gap-3 px-4 py-3 ${isMe ? "bg-red-50/40" : ""}`}>
+              <div key={p.id} className={`flex items-center gap-3 px-4 py-3 ${isMe ? "bg-blue-50/40" : ""}`}>
                 <Avatar name={p.nickname || p.full_name} color={avatarColor(p.nickname || p.full_name)} />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-slate-800 truncate">
@@ -184,7 +184,7 @@ function AttendanceContent() {
                     {p.jersey_number != null && (
                       <span className="ml-1.5 text-[10px] font-extrabold text-slate-400">#{p.jersey_number}</span>
                     )}
-                    {isMe && <span className="ml-1.5 text-[10px] font-extrabold text-red-500">(bạn)</span>}
+                    {isMe && <span className="ml-1.5 text-[10px] font-extrabold text-blue-500">(bạn)</span>}
                   </p>
                   <p className="text-[10px] text-slate-400 font-medium">{p.full_name}</p>
                 </div>

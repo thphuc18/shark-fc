@@ -200,7 +200,7 @@ function HomeContent() {
             <h3 className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">
               Giao dịch gần đây
             </h3>
-            <Link href="/fund" className="text-[11px] font-extrabold text-red-600 flex items-center gap-0.5">
+            <Link href="/fund" className="text-[11px] font-extrabold text-blue-600 flex items-center gap-0.5">
               Xem tất cả <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -248,7 +248,7 @@ function HomeContent() {
           </div>
           <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
             Người đầu tiên đăng ký sẽ là <b>Quản trị viên</b>. Các thành viên khác đăng ký qua trang{" "}
-            <Link href="/register" className="text-red-600 font-bold">
+            <Link href="/register" className="text-blue-600 font-bold">
               /register
             </Link>{" "}
             hoặc nhờ admin cấp quyền.

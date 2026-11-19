@@ -111,7 +111,7 @@ function AdminContent() {
             </p>
           </div>
         </div>
-        <Link href="/debts" className="text-red-600">
+        <Link href="/debts" className="text-blue-600">
           <ArrowRight className="w-5 h-5" />
         </Link>
       </Card>

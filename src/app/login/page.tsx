@@ -39,7 +39,7 @@ export default function LoginPage() {
           <div className="relative w-20 h-20 rounded-3xl bg-white border border-slate-200 shadow-lg overflow-hidden">
             <Image src="/logo.png" alt={TEAM_NAME} fill className="object-contain" sizes="80px" />
           </div>
-          <h1 className="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-blue-600 via-cyan-500 to-sky-400 bg-clip-text text-transparent">
             {TEAM_NAME}
           </h1>
           <p className="text-xs text-slate-400 font-semibold -mt-2">{TAGLINE}</p>
@@ -89,7 +89,7 @@ export default function LoginPage() {
 
         <p className="text-xs text-slate-500 font-medium">
           Chưa có tài khoản?{" "}
-          <Link href="/register" className="text-red-600 font-extrabold">
+          <Link href="/register" className="text-blue-600 font-extrabold">
             Đăng ký ngay
           </Link>
         </p>

@@ -143,7 +143,7 @@ export default function RegisterPage() {
 
         <p className="text-xs text-slate-500 font-medium text-center">
           Đã có tài khoản?{" "}
-          <Link href="/login" className="text-red-600 font-extrabold">
+          <Link href="/login" className="text-blue-600 font-extrabold">
             Đăng nhập
           </Link>
         </p>

@@ -110,7 +110,7 @@ function MembersContent() {
             className={`flex items-center gap-3 ${!m.is_active ? "opacity-55" : ""}`}
           >
             {m.jersey_number != null ? (
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-500 text-white flex items-center justify-center text-sm font-extrabold shadow-sm shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center text-sm font-extrabold shadow-sm shrink-0">
                 {m.jersey_number}
               </div>
             ) : (
@@ -119,7 +119,7 @@ function MembersContent() {
             <div className="flex-1 min-w-0">
               <p className="text-sm font-extrabold text-slate-800 truncate">
                 {m.nickname || m.full_name}
-                {m.id === profile?.id && <span className="ml-1.5 text-[10px] font-extrabold text-red-500">(bạn)</span>}
+                {m.id === profile?.id && <span className="ml-1.5 text-[10px] font-extrabold text-blue-500">(bạn)</span>}
               </p>
               <p className="text-[11px] text-slate-400 font-medium truncate">
                 {m.full_name}
@@ -190,7 +190,7 @@ function MembersContent() {
               type="checkbox"
               checked={fActive}
               onChange={(e) => setFActive(e.target.checked)}
-              className="w-4.5 h-4.5 accent-red-600"
+              className="w-4.5 h-4.5 accent-blue-600"
             />
             <span className="text-sm font-bold text-slate-700">Đang hoạt động</span>
           </label>
